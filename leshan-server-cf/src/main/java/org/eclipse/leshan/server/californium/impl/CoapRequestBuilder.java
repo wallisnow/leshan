@@ -25,7 +25,7 @@ import java.util.Map.Entry;
 import org.eclipse.californium.core.coap.MediaTypeRegistry;
 import org.eclipse.californium.core.coap.Request;
 import org.eclipse.californium.elements.EndpointContext;
-import org.eclipse.leshan.core.californium.ExchangeUtil;
+import org.eclipse.leshan.core.californium.EndpointContextUtil;
 import org.eclipse.leshan.core.model.LwM2mModel;
 import org.eclipse.leshan.core.node.LwM2mObjectInstance;
 import org.eclipse.leshan.core.node.LwM2mPath;
@@ -173,7 +173,7 @@ public class CoapRequestBuilder implements DownlinkRequestVisitor {
     public void visit(BootstrapDeleteRequest request) {
         coapRequest = Request.newDelete();
         coapRequest.setConfirmable(true);
-        EndpointContext context = ExchangeUtil.extractContext(destination);
+        EndpointContext context = EndpointContextUtil.extractContext(destination);
         coapRequest.setDestinationContext(context);
     }
 
@@ -181,7 +181,7 @@ public class CoapRequestBuilder implements DownlinkRequestVisitor {
     public void visit(BootstrapFinishRequest request) {
         coapRequest = Request.newPost();
         coapRequest.setConfirmable(true);
-        EndpointContext context = ExchangeUtil.extractContext(destination);
+        EndpointContext context = EndpointContextUtil.extractContext(destination);
         coapRequest.setDestinationContext(context);
 
         // root path
@@ -197,7 +197,7 @@ public class CoapRequestBuilder implements DownlinkRequestVisitor {
     }
 
     private final void setTarget(Request coapRequest, LwM2mPath path) {
-        EndpointContext context = ExchangeUtil.extractContext(destination);
+        EndpointContext context = EndpointContextUtil.extractContext(destination);
         coapRequest.setDestinationContext(context);
 
         // root path
